@@ -55,7 +55,7 @@ func (b *Button) Tick(ev tl.Event) {
 func main() {
 	g := tl.NewGame()
 /*	g.Screen().EnablePixelMode()*/
-	g.Screen().AddEntity(NewImage(tl.BackgroundCanvasFromFile("uno4.png")))
+	g.Screen().AddEntity(NewImage(tl.BackgroundCanvasFromFile("uno.png")))
 	//g.Screen().AddEntity(NewImage(tl.BackgroundCanvasFromFile("cards.png")))
 	g.Screen().AddEntity(NewButton(10, 20, 20, 5, tl.ColorWhite, "New game", uno.NewGame))
 	g.Screen().AddEntity(NewButton(50, 20, 20, 5, tl.ColorWhite, "Help", uno.Help))
