@@ -1,5 +1,17 @@
 package termloop
 
+
+type Card1 struct {
+	Color string
+	Value string
+	Cost int
+}
+
+type CardDeck [] Card1
+
+type EventInfo struct {
+	text *tl.Text
+}
 // Provides a general Drawable to be rendered.
 type Card struct {
 	canvas Canvas
