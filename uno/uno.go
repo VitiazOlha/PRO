@@ -2,9 +2,13 @@ package uno
 
 import (
 	"fmt"
-)
+	"time"
+	"os"
+	"github.com/nsf/termbox-go"
+	)
 
 func NewGame() {
+	time.Sleep(1000 * time.Millisecond)
 	fmt.Println("This is new game")
 }
 
@@ -17,5 +21,6 @@ func Settings() {
 }
 
 func Exit() {
-	fmt.Println("This is exit")
+	termbox.Close()
+	os.Exit(0)
 }

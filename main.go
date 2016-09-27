@@ -41,13 +41,12 @@ func NewButton(x, y, w, h int, col tl.Attr, t string, fn func()) *Button {
 func (b *Button) Draw(s *tl.Screen) {
 	b.r.Draw(s)
 	b.text.Draw(s)
-
 }
 
 func (b *Button) Tick(ev tl.Event) {
 	x, y := b.r.Position()
 	h, w := b.r.Size()
-	if ev.Type == tl.EventMouse && (ev.MouseX > x && ev.MouseX < x + h) && (ev.MouseY > y && ev.MouseY < y + w) {
+	if ev.Type == tl.EventMouse && ev.Key == tl.MouseLeft && (ev.MouseX > x && ev.MouseX < x + h) && (ev.MouseY > y && ev.MouseY < y + w) {
 		b.f()
 	}
 }
