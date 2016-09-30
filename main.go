@@ -1,7 +1,5 @@
 package main
 
-// A very simple image viewer, which uses Termloop's pixel mode
-
 import (
 	"KPI/PRO/uno"
 	tl "github.com/JoelOtter/termloop"

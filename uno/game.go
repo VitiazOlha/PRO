@@ -8,7 +8,7 @@ import (
 var playersCounter = 2
 
 func NewGame() {
-	//deck := newCardDeck()
+	deck := newCardDeck()
 	players := make([][]Card, playersCounter) 
 
 	for index, _ := range players {
@@ -16,4 +16,9 @@ func NewGame() {
 	}
 
 	fmt.Println("This is new game")
+}
+
+
+func newCardDeck() {
+	
 }
