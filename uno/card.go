@@ -12,3 +12,7 @@ type Card struct {
 	cost int
 	f func()
 }
+
+func NewCard(color, value string, cost int, _ func() ) *Card {
+	return &Card{color: color, value: value, cost: cost, f: Exit,}
+}

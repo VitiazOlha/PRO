@@ -9,6 +9,12 @@ import (
 
 var playersCounter = 2
 
+func checkErr(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+
 func NewGame() {
 
 	deck := newCardDeck()
@@ -22,11 +28,11 @@ func NewGame() {
 }
 
 
-func newCardDeck() {
+func newCardDeck() *CardDeck {
 	
 	ldeck, err := ioutil.ReadFile("deck.json")
 	checkErr(err)
-	parsers := make(map[string]tl.EntityParser)
+	parsers := make(map[string] tl.EntityParser) //todo wtf?
 	err = LoadDeckFromJson(string(ldeck), parsers)
 	checkErr(err)
 }
@@ -40,7 +46,7 @@ func LoadDeckFromJson(jsonMap string, parsers map[string]EntityParser) error {
 		return err
 	}
 	for _, lm := range parsedMap {
-		
+
 		var card Card 
 		for i := 0; i < int(data["quantity"].(int)); i++ {
 			card = parseCard(lm.Data)
@@ -52,22 +58,9 @@ func LoadDeckFromJson(jsonMap string, parsers map[string]EntityParser) error {
 
 func parseCard(data map[string]interface{}) *Card{
 	return NewCard(
-		data["color"].(string)),
-		data["value"].(string)),
+		data["color"].(string),
+		data["value"].(string),
 		int(data["cost"].(int)),
-		data["f"].(string)),
+		data["f"].(string),
 	)
 }
-
-
-func parseText(data map[string]interface{}) *Text {
-	return NewText(
-		int(data["x"].(float64)),
-		int(data["y"].(float64)),
-		data["text"].(string),
-		Attr(data["fg"].(float64)),
-		Attr(data["bg"].(float64)),
-	)
-}
-
-
