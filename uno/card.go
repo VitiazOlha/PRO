@@ -21,5 +21,5 @@ func NewCard(color, value string, cost int, _ string) *Card {
 }
 
 func (c *Card) Print () {
-	fmt.Println("%s %d %s",c.color, c.value, c.cost)
+	fmt.Println(c.color, c.value, c.cost)
 }

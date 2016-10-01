@@ -278,5 +278,103 @@
         "cost" : 9,
         "quantity" : 2,
         "f" : "basic"
+    },
+    {
+        "color" : "yellow",
+        "value" : "⨂",
+        "cost" : 20,
+        "quantity" : 2,
+        "f" : "stop"
+    },
+    {
+        "color" : "yellow",
+        "value" : "⮂",
+        "cost" : 20,
+        "quantity" : 2,
+        "f" : "reverse"
+    },
+    {
+        "color" : "yellow",
+        "value" : "+2",
+        "cost" : 20,
+        "quantity" : 2,
+        "f" : "stopPlus"
+    },
+    {
+        "color" : "blue",
+        "value" : "⨂",
+        "cost" : 20,
+        "quantity" : 2,
+        "f" : "stop"
+    },
+    {
+        "color" : "blue",
+        "value" : "⮂",
+        "cost" : 20,
+        "quantity" : 2,
+        "f" : "reverse"
+    },
+    {
+        "color" : "blue",
+        "value" : "+2",
+        "cost" : 20,
+        "quantity" : 2,
+        "f" : "stopPlus"
+    },
+    {
+        "color" : "red",
+        "value" : "⨂",
+        "cost" : 20,
+        "quantity" : 2,
+        "f" : "stop"
+    },
+    {
+        "color" : "red",
+        "value" : "⮂",
+        "cost" : 20,
+        "quantity" : 2,
+        "f" : "reverse"
+    },
+    {
+        "color" : "red",
+        "value" : "+2",
+        "cost" : 20,
+        "quantity" : 2,
+        "f" : "stopPlus"
+    },
+    {
+        "color" : "green",
+        "value" : "⨂",
+        "cost" : 20,
+        "quantity" : 2,
+        "f" : "stop"
+    },
+    {
+        "color" : "green",
+        "value" : "⮂",
+        "cost" : 20,
+        "quantity" : 2,
+        "f" : "reverse"
+    },
+    {
+        "color" : "green",
+        "value" : "+2",
+        "cost" : 20,
+        "quantity" : 2,
+        "f" : "stopPlus"
+    },
+    {
+        "color" : "black",
+        "value" : "",
+        "cost" : 50,
+        "quantity" : 4,
+        "f" : "color"
+    },
+    {
+        "color" : "black",
+        "value" : "+4",
+        "cost" : 50,
+        "quantity" : 4,
+        "f" : "colorPlus"
     }
 ]
