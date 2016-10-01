@@ -18,6 +18,11 @@ func checkErr(e error) {
 func NewGame() {
 
 	deck := newCardDeck()
+
+	for _, card := range deck {
+		card.Print()
+	}
+	
 	players := make([][]Card, playersCounter) 
 
 	for index, _ := range players {
@@ -28,39 +33,33 @@ func NewGame() {
 }
 
 
-func newCardDeck() *CardDeck {
-	
-	ldeck, err := ioutil.ReadFile("deck.json")
-	checkErr(err)
-	parsers := make(map[string] tl.EntityParser) //todo wtf?
-	err = LoadDeckFromJson(string(ldeck), parsers)
-	checkErr(err)
-}
-
-
-func LoadDeckFromJson(jsonMap string, parsers map[string]EntityParser) error {
-	
+func newCardDeck() CardDeck {
 	var deck CardDeck
-	parsedMap := []levelMap{}
-	if err := json.Unmarshal([]byte(jsonMap), &parsedMap); err != nil {
-		return err
-	}
-	for _, lm := range parsedMap {
 
-		var card Card 
-		for i := 0; i < int(data["quantity"].(int)); i++ {
-			card = parseCard(lm.Data)
-			deck = append(deck, card)
-		}
+	ldeck, err := ioutil.ReadFile("uno/deck.json")
+	checkErr(err)
+
+	var f interface{}
+    err = json.Unmarshal(ldeck, &f)
+    checkErr(err)
+
+    m := f.([]interface{})
+	
+	for _, v := range m {
+		vv := v.(map[string]interface{})
+		q := int(vv["quantity"].(float64))
+		for i := 0; i < q; i++ {
+   			deck = append(deck, parseCard(vv))
+   		}
 	}
-	return nil
+	return deck
 }
 
 func parseCard(data map[string]interface{}) *Card{
 	return NewCard(
 		data["color"].(string),
 		data["value"].(string),
-		int(data["cost"].(int)),
+		int(data["cost"].(float64)),
 		data["f"].(string),
 	)
 }

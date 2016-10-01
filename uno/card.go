@@ -1,10 +1,13 @@
 package uno
 
-type CardDeck [] Card
+import (
+	"fmt"
+)
+
+type CardDeck [] *Card
 
 const width  = 4
 const height = 5
-// Provides a general Drawable to be rendered.
 
 type Card struct {
 	color string
@@ -13,6 +16,10 @@ type Card struct {
 	f func()
 }
 
-func NewCard(color, value string, cost int, _ func() ) *Card {
+func NewCard(color, value string, cost int, _ string) *Card {
 	return &Card{color: color, value: value, cost: cost, f: Exit,}
+}
+
+func (c *Card) Print () {
+	fmt.Println("%s %d %s",c.color, c.value, c.cost)
 }
