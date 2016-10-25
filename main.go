@@ -54,9 +54,9 @@ func main() {
 /*	g.Screen().EnablePixelMode()*/
 	g.Screen().AddEntity(NewImage(tl.BackgroundCanvasFromFile("uno.png")))
 	//g.Screen().AddEntity(NewImage(tl.BackgroundCanvasFromFile("cards.png")))
-	g.Screen().AddEntity(NewButton(10, 20, 20, 5, tl.ColorWhite, "New game", uno.NewGame))
-	g.Screen().AddEntity(NewButton(50, 20, 20, 5, tl.ColorWhite, "Help", uno.Help))
-	g.Screen().AddEntity(NewButton(10, 30, 20, 5, tl.ColorWhite, "Settings", uno.Settings))
-	g.Screen().AddEntity(NewButton(50, 30, 20, 5, tl.ColorWhite, "Exit", uno.Exit))
+	g.Screen().AddEntity(NewButton(10, 20, 112, 7, tl.ColorWhite, "New game", uno.NewGame))
+	//g.Screen().AddEntity(NewButton(50, 20, 20, 5, tl.ColorWhite, "Help", uno.Help))
+	//g.Screen().AddEntity(NewButton(10, 30, 20, 5, tl.ColorWhite, "Settings", uno.Settings))
+	g.Screen().AddEntity(NewButton(10, 30, 112, 7, tl.ColorWhite, "Exit", uno.Exit))
 	g.Start()
 }

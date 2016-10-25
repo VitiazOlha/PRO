@@ -1,7 +1,6 @@
 package uno
 
 import (
-	"fmt"
 	"encoding/json"
 	"io/ioutil"
 	"time"
@@ -18,27 +17,28 @@ func checkErr(e error) {
 	}
 }
 
+type Game struct {
+	deck CardDeck
+	pile CardDeck
+	players []CardDeck
+	playerId int
+	top *Card
+	route int
+} 
+
+
 func NewGame() {
 
 	deck := newCardDeck()
 	deck = deck.shuffleDeck()
 
-	//out only for test
-	for _, card := range deck {
-		card.Print()
-	}
-
-	fmt.Println(len(deck))
-
 	players := make([]CardDeck, playersCounter) 
 
 	for index, _ := range players {
-		players[index] = make(CardDeck, 0, 10)
+		players[index] = deck[0:7]
+		deck = deck[8:]
 	}
-
-
-
-	fmt.Println("This is new game")
+	_ = Game{deck : deck[1:], pile : make(CardDeck, 0), players : players, top : deck[0], playerId : 0,route : 1,}
 }
 
 
@@ -46,12 +46,7 @@ func (deck CardDeck) shuffleDeck() CardDeck {
 	var newDeck CardDeck
 
 	for len(deck) > 0 {
-		i := ((int(time.Now().UnixNano()) * rand.Intn(100)) % len(deck))
-		fmt.Println(i)
-		i = int(math.Abs(float64(i)))
-//		time.Sleep(1000 * time.Millisecond)
-
-
+		i := int(math.Abs(float64(int(time.Now().UnixNano()) * rand.Intn(100)))) % len(deck)
 		newDeck = append(newDeck, deck[i])
 		copy(deck[i:], deck[i+1:])
 		deck[len(deck)-1] = nil
