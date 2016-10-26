@@ -26,6 +26,14 @@ type Game struct {
 	route int
 } 
 
+var functions = [...] func(deck CardDeck) {
+ Basic,
+ Stop,
+ Reverse,
+ StopPlus,
+ Color,
+ ColorPlus,
+}
 
 func NewGame() {
 
@@ -38,9 +46,29 @@ func NewGame() {
 		players[index] = deck[0:7]
 		deck = deck[8:]
 	}
-	_ = Game{deck : deck[1:], pile : make(CardDeck, 0), players : players, top : deck[0], playerId : 0,route : 1,}
+	newGame := Game{deck : deck[1:], pile : make(CardDeck, 0), players : players, top : deck[0], playerId : 0,route : 1,}
+	//crutch
+	for _, card := range newGame.deck {
+		card.SetGame(&newGame)
+	}
+	for _, player := range newGame.players {
+		for _, card := range player {
+			card.SetGame(&newGame)
+		}
+	}
+	newGame.top.SetGame(&newGame)
+	
+	newGame.playGame()
 }
 
+func (game Game) playGame() {
+	game.drawGame()
+
+}
+
+func (game Game) drawGame() {
+
+}
 
 func (deck CardDeck) shuffleDeck() CardDeck {
 	var newDeck CardDeck
@@ -79,10 +107,11 @@ func newCardDeck() CardDeck {
 }
 
 func parseCard(data map[string]interface{}) *Card{
+	f_num := int(data["f"].(float64)) - 1
 	return NewCard(
 		data["color"].(string),
 		data["value"].(string),
 		int(data["cost"].(float64)),
-		data["f"].(string),
+		functions[f_num],
 	)
 }
