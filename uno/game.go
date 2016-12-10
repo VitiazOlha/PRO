@@ -216,8 +216,16 @@ func (game *Game) TalkUno(){
 }
 
 func (game *Game) GetCardFromDeck(playerId, cardCount int) {
-	game.players[playerId] = append(game.players[playerId], game.deck[0:cardCount]...)
-	game.deck = game.deck[cardCount:]
+	if len(game.deck) < cardCount {
+		prevLen := len(game.deck)
+		game.players[playerId] = append(game.players[playerId], game.deck...)
+		game.deck = game.pile.shuffleDeck()
+		game.pile = make(CardDeck, 0)
+		game.GetCardFromDeck(playerId, cardCount - prevLen)
+	} else {
+		game.players[playerId] = append(game.players[playerId], game.deck[0:cardCount]...)
+		game.deck = game.deck[cardCount:]
+	}
 }
 
 func(game *Game) DoStep(card *Card){
