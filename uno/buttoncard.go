@@ -26,13 +26,13 @@ func NewCardButton(x, y int, c *Card) *CardButton {
 func (c *CardButton) Draw(s *tl.Screen) {
 	x, y := c.r.Position()
 	c.r.Draw(s)
-	tl.NewText(x + 1, y + 2, c.card.value, 1, 0).Draw(s)
+	tl.NewText(x + 1, y + 2, c.card.Value, 1, 0).Draw(s)
 }
 
 func (c *CardButton) Tick(ev tl.Event) {
 	x, y := c.r.Position()
 	if ev.Type == tl.EventMouse && ev.Key == tl.MouseLeft && (ev.MouseX >= x && ev.MouseX <= x + height) && (ev.MouseY >= y && ev.MouseY <= y + width) {
-		if c.card.color == c.card.game.nextColor || c.card.value == c.card.game.top.value || c.card.color == "black" {
+		if c.card.color == c.card.game.nextColor || c.card.Value == c.card.game.top.Value || c.card.color == "black" {
 			c.card.game.DoStep(c.card)
 		}
 	}

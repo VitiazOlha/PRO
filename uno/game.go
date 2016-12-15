@@ -43,7 +43,7 @@ var functions = [...] func(game *Game, card *Card) {
 
 func NewGame() {
 	deck := NewCardDeck()
-	deck = deck.shuffleDeck()
+	deck = deck.ShuffleDeck()
 
 	players := make([]CardDeck, playersCounter) 
 
@@ -82,7 +82,7 @@ func (game *Game) drawGame(g *tl.Game) {
 	}
 
 	g.Screen().AddEntity(tl.NewEntityFromCanvas(5, 2, *tl.BackgroundCanvasFromFile(game.top.color + ".png")))
-	g.Screen().AddEntity(tl.NewText(6, 4, game.top.value, 1, 0))
+	g.Screen().AddEntity(tl.NewText(6, 4, game.top.Value, 1, 0))
 
 	g.Screen().AddEntity(tl.NewEntityFromCanvas(10, 2, *tl.BackgroundCanvasFromFile("black.png")))
 	g.Screen().AddEntity(tl.NewText(14, 4, " X " + strconv.Itoa(len(game.deck)), 0, 1))
@@ -111,7 +111,7 @@ func (game *Game) drawGame(g *tl.Game) {
 	}
 }
 
-func (deck CardDeck) shuffleDeck() CardDeck {
+func (deck CardDeck) ShuffleDeck() CardDeck {
 	var newDeck CardDeck
 
 	for len(deck) > 0 {
@@ -219,7 +219,7 @@ func (game *Game) GetCardFromDeck(playerId, cardCount int) {
 	if len(game.deck) < cardCount {
 		prevLen := len(game.deck)
 		game.players[playerId] = append(game.players[playerId], game.deck...)
-		game.deck = game.pile.shuffleDeck()
+		game.deck = game.pile.ShuffleDeck()
 		game.pile = make(CardDeck, 0)
 		game.GetCardFromDeck(playerId, cardCount - prevLen)
 	} else {

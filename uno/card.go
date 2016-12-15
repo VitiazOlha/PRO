@@ -4,7 +4,7 @@ type CardDeck [] *Card
 
 type Card struct {
 	color string
-	value string
+	Value string
 	cost int
 	f func(game *Game, card *Card)
 	game *Game
@@ -35,7 +35,7 @@ func ColorPlus(game *Game, card *Card){
 }
 
 func NewCard(color, value string, cost int, f func(game *Game, card *Card)) *Card {
-	return &Card{color: color, value: value, cost: cost, f: f, game: nil,}
+	return &Card{color: color, Value: value, cost: cost, f: f, game: nil,}
 }
 
 func (c *Card) SetGame(game *Game) {

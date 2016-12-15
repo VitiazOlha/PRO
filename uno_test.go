@@ -2,39 +2,12 @@ package main
 import (
 	"testing"
 	"KPI/PRO/uno"
-	// "reflect"
+	"reflect"
 )
-
-// type Colors struct{
-// 	blues int
-// 	reds int
-// 	yellows int
-// 	greens int
-// }
-
-
-// func SetCardsQuantities(str string, deck CardDeck) *Colors {
-// 	colors := Colors{ blues: 0, reds: 0, yellows: 0, greens: 0}
-// 	for i:=0; i < len(deck); i++ {
-// 		if deck[i].value == str {
-// 			switch deck[i].color {
-// 				case "blue":
-// 					colors.blues ++
-// 				case "red":
-// 					colors.reds ++
-// 				case "yellow":
-// 					colors.yellows ++
-// 				case "green":
-// 					colors.greens ++
-// 			}	
-// 		}
-// 	}
-
-// 	return &colors
-// }
 
 func TestCardsQuantity(t *testing.T) {
 	deck := uno.NewCardDeck()
+	deck = deck.ShuffleDeck()
 	if len(deck) != 108 {
 		t.Error("Incorrect quantity of cards in deck.")
 	} else {
@@ -42,180 +15,95 @@ func TestCardsQuantity(t *testing.T) {
 	}
 }
 
-// func TestDifferentCardsQuantities(t *testing.T) {
-// 	deck := newCardDeck()
-// 	t.Run("Zeros", func(t *testing.T){
-// 		expZeros := Colors{1,1,1,1}
-// 		zeros := SetCardsQuantities("0", deck)
+func func_name(t *testing.T, exp uno.Colors, deck uno.CardDeck, card_type string) {
+	test := uno.SetCardsQuantities(card_type, deck)
+		if reflect.DeepEqual(exp, test) {
+			t.Log("Success")
+		} else {
+			t.Error("Failed")
+		}
+}
 
-// 		if reflect.DeepEqual(expZeros, zeros) {
-// 			t.Log("Success")
-// 		} else {
-// 			t.Error("Failed")
-// 		}
+func TestDifferentCardsQuantities(t *testing.T) {
+	deck := uno.NewCardDeck()
+	deck = deck.ShuffleDeck()
 
-// 		})
-// 	t.Run("Ones", func(t *testing.T){
-// 		expOnes := Colors{2,2,2,2}
-// 		ones := SetCardsQuantities("1", deck)
+	t.Run("Zeros", func(t *testing.T){
+	func_name(t, uno.Colors{1,1,1,1}, deck, "0")
+	})
 
-// 		if reflect.DeepEqual(expZeros, zeros) {
-// 			t.Log("Success")
-// 		} else {
-// 			t.Error("Failed")
-// 		}
+	t.Run("Ones", func(t *testing.T){
+	func_name(t, uno.Colors{2,2,2,2}, deck, "1")
+	})
 
-// 		})
-// 	t.Run("Twos", func(t *testing.T){
-// 		expTwos := Colors{2,2,2,2}
-// 		twos := SetCardsQuantities("2", deck)
+	t.Run("Twos", func(t *testing.T){
+	func_name(t, uno.Colors{2,2,2,2}, deck, "2")
+	})
 
-// 		if reflect.DeepEqual(expZeros, zeros) {
-// 			t.Log("Success")
-// 		} else {
-// 			t.Error("Failed")
-// 		}
+	t.Run("Threes", func(t *testing.T){
+	func_name(t, uno.Colors{2,2,2,2}, deck, "3")
+	})
 
-// 		})
-// 	t.Run("Threes", func(t *testing.T){
-// 		expThrees := Colors{2,2,2,2}
-// 		threes := SetCardsQuantities("3", deck)
+	t.Run("Fours", func(t *testing.T){
+	func_name(t, uno.Colors{2,2,2,2}, deck, "4")
+	})
 
-// 		if reflect.DeepEqual(expZeros, zeros) {
-// 			t.Log("Success")
-// 		} else {
-// 			t.Error("Failed")
-// 		}
+	t.Run("Fives", func(t *testing.T){
+	func_name(t, uno.Colors{2,2,2,2}, deck, "5")
+	})
 
-// 		})
-// 	t.Run("Fours", func(t *testing.T){
-// 		expFours := Colors{2,2,2,2}
-// 		fours := SetCardsQuantities("4", deck)
+	t.Run("Sixs", func(t *testing.T){
+	func_name(t, uno.Colors{2,2,2,2}, deck, "6")
+	})
 
-// 		if reflect.DeepEqual(expZeros, zeros) {
-// 			t.Log("Success")
-// 		} else {
-// 			t.Error("Failed")
-// 		}
+	t.Run("Sevens", func(t *testing.T){
+	func_name(t, uno.Colors{2,2,2,2}, deck, "7")
+	})
 
-// 		})
-// 	t.Run("Fives", func(t *testing.T){
-// 		expFives := Colors{2,2,2,2}
-// 		fives := SetCardsQuantities("5", deck)
+	t.Run("Eights", func(t *testing.T){
+	func_name(t, uno.Colors{2,2,2,2}, deck, "8")
+	})
 
-// 		if reflect.DeepEqual(expZeros, zeros) {
-// 			t.Log("Success")
-// 		} else {
-// 			t.Error("Failed")
-// 		}
+	t.Run("Nines", func(t *testing.T){
+	func_name(t, uno.Colors{2,2,2,2}, deck, "9")
+	})
 
-// 		})
-// 	t.Run("Sixs", func(t *testing.T){
-// 		expSixs := Colors{2,2,2,2}
-// 		sixs := SetCardsQuantities("6", deck)
+	t.Run("Reverses", func(t *testing.T){
+	func_name(t, uno.Colors{2,2,2,2}, deck, "⮂")
+	})
 
-// 		if reflect.DeepEqual(expZeros, zeros) {
-// 			t.Log("Success")
-// 		} else {
-// 			t.Error("Failed")
-// 		}
+	t.Run("+2s", func(t *testing.T){
+	func_name(t, uno.Colors{2,2,2,2}, deck, "+2")
+	})
 
-// 		})
-// 	t.Run("Sevens", func(t *testing.T){
-// 		expSevens := Colors{2,2,2,2}
-// 		sevens := SetCardsQuantities("7", deck)
-
-// 		if reflect.DeepEqual(expZeros, zeros) {
-// 			t.Log("Success")
-// 		} else {
-// 			t.Error("Failed")
-// 		}
-
-// 		})
-// 	t.Run("Eights", func(t *testing.T){
-// 		expEights := Colors{2,2,2,2}
-// 		eights := SetCardsQuantities("8", deck)
-
-// 		if reflect.DeepEqual(expZeros, zeros) {
-// 			t.Log("Success")
-// 		} else {
-// 			t.Error("Failed")
-// 		}
-
-// 		})
-// 	t.Run("Nines", func(t *testing.T){
-// 		expNines := Colors{2,2,2,2}
-// 		nines := SetCardsQuantities("9", deck)
-
-// 		if reflect.DeepEqual(expZeros, zeros) {
-// 			t.Log("Success")
-// 		} else {
-// 			t.Error("Failed")
-// 		}
-
-// 		})
-// 	t.Run("Reverses", func(t *testing.T){
-// 		expReverses := Colors{2,2,2,2}
-// 		reverses := SetCardsQuantities("⮂", deck)
-
-// 		if reflect.DeepEqual(expZeros, zeros) {
-// 			t.Log("Success")
-// 		} else {
-// 			t.Error("Failed")
-// 		}
-
-// 		})
-// 	t.Run("+2s", func(t *testing.T){
-// 		expDraw2s := Colors{2,2,2,2}
-// 		draw2s := SetCardsQuantities("+2", deck)
-
-// 		if reflect.DeepEqual(expZeros, zeros) {
-// 			t.Log("Success")
-// 		} else {
-// 			t.Error("Failed")
-// 		}
-
-// 		})
-// 	t.Run("Skips", func(t *testing.T){
-// 		expSkips := Colors{2,2,2,2}
-// 		skips := SetCardsQuantities("⨂", deck)
-
-// 		if reflect.DeepEqual(expZeros, zeros) {
-// 			t.Log("Success")
-// 		} else {
-// 			t.Error("Failed")
-// 		}
-		
-// 		})
-
-	// t.Run("Wilds", func(t *testing.T){
-	// 	count := 0
-	// 	for i:=0; i < len(deck); i++ {
-	// 		if deck[i].value == "" {
-	// 			count ++
-	// 		} 
-	// 	}
-	// 	if count == 4 {
-	// 		t.Log("Success")
-	// 	} else {
-	// 		t.Error("Failed")
-	// 	}
-	// 	)
-	// t.Run("(Wild + 4)s", func(t *testing.T){
-	// 	count := 0
-	// 	for i:=0; i < len(deck); i++ {
-	// 	 	if deck[i].value == "+4" {
-	// 	 		count ++
-	// 	 	}
-	// 	}
-
-	// 	if count == 4 {
-	// 		t.Log("Success")
-	// 	} else {
-	// 		t.Error("Failed")
-	// 	}
-	// 	)
-
-
-
-// }
+	t.Run("Skips", func(t *testing.T){
+	func_name(t, uno.Colors{2,2,2,2}, deck, "⨂")
+	})
+	
+	t.Run("Wilds", func(t *testing.T) {
+	 	count := 0
+	 	for i:=0; i < len(deck); i++ {
+	 		if deck[i].Value == "" {
+	 			count ++
+	 		} 
+	 	}
+	 	if count == 4 {
+	 		t.Log("Success")
+	 	} else {
+	 		t.Error("Failed")
+ 		}
+ 	})
+ 	t.Run("(Wild + 4)s", func(t *testing.T){
+	 	count := 0
+	 	for i:=0; i < len(deck); i++ {
+	 	 	if deck[i].Value == "+4" {
+	 	 		count ++
+	 	 	}
+	 	}
+	 	if count == 4 {
+	 		t.Log("Success")
+	 	} else {
+	 		t.Error("Failed")
+	 	}
+ 	})
+}
