@@ -42,7 +42,7 @@ var functions = [...] func(game *Game, card *Card) {
 }
 
 func NewGame() {
-	deck := newCardDeck()
+	deck := NewCardDeck()
 	deck = deck.shuffleDeck()
 
 	players := make([]CardDeck, playersCounter) 
@@ -88,7 +88,7 @@ func (game *Game) drawGame(g *tl.Game) {
 	g.Screen().AddEntity(tl.NewText(14, 4, " X " + strconv.Itoa(len(game.deck)), 0, 1))
 	g.Screen().AddEntity(tl.NewText(11, 4, "տօ", 0, 1))
 
-	g.Screen().AddEntity(NewButton(20, 2, 5, 1, tl.ColorWhite, "Exit", Exit))
+	g.Screen().AddEntity(NewButton(20, 2, 5, 1, tl.ColorWhite, "Exit", Main))
 	
 	if game.isGet == true {
 		g.Screen().AddEntity(NewButton(20, 4, 5, 1, tl.ColorWhite, "Next", game.NextStep))
@@ -124,7 +124,7 @@ func (deck CardDeck) shuffleDeck() CardDeck {
 	return newDeck
 }
 
-func newCardDeck() CardDeck {
+func NewCardDeck() CardDeck {
 	var deck CardDeck
 
 	ldeck, err := ioutil.ReadFile("uno/deck.json")
