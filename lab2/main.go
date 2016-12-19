@@ -10,6 +10,10 @@ import (
 	"strings"
 )
 
+var (
+	gtm sync.Mutex
+)
+
 type TablesInMemory []*Table
 
 type Table struct {
@@ -51,8 +55,10 @@ func checkErr(e error) {
 }
 
 func getTable(tables *TablesInMemory, name string) *Table {
+	gtm.Lock()
 	for i := range *tables {
 		if (*tables)[i].name == name {
+			gtm.Unlock()
 			return (*tables)[i]
 		}
 	}
@@ -62,6 +68,7 @@ func getTable(tables *TablesInMemory, name string) *Table {
 	if table != nil {
 		*tables = append(*tables, table)
 	}
+	gtm.Unlock()
 	return table
 }
 
