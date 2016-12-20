@@ -22,6 +22,10 @@ type Table struct {
 	m sync.RWMutex
 }
 
+func NewTable(file_name string, data map[string]string) *Table {
+	return &Table{name: file_name, data: data,}
+}
+
 func DecodeJSON(file_name string) *Table{
 	key_val, err := ioutil.ReadFile("data/" + file_name)
 	if err != nil {
@@ -93,10 +97,10 @@ func getKeys(c net.Conn, tables *TablesInMemory, query_split []string) {
 		} else {
 			table.m.RLock()
 			keys := make([]string, 0, len(table.data))
-			table.m.RUnlock()
 		    for k := range table.data {
 		        keys = append(keys, k)
 		    }
+		    table.m.RUnlock()
     		c.Write([]byte("[" + strings.Join(keys, ", ") + "]" + "\n"))
 		}
 	} else {
@@ -164,10 +168,6 @@ func delKey(c net.Conn, tablechan chan<- Table, tables *TablesInMemory, query_sp
 	}
 }
 
-func NewTable(file_name string, data map[string]string) *Table {
-	return &Table{name: file_name, data: data,}
-}
-
 func handleRequest(c net.Conn, tablechan chan<- Table, tables *TablesInMemory, query string) {
 	query_split := strings.Fields(query)
 
@@ -205,7 +205,7 @@ func handleConnection(c net.Conn, tablechan chan<- Table, tables *TablesInMemory
 		if (err != nil) || (n == 0) {
 			break
 		} else {
-			handleRequest(c, tablechan, tables, string(buf[0:n]))
+			go handleRequest(c, tablechan, tables, string(buf[0:n]))
 		}
 	}
 }
